@@ -1,6 +1,7 @@
 {% extends 'twitter_clone/base.html' %}
-
+{% load static %}
 {% block content %}
+
 <body>
 
 	<nav class="navbar navbar-default">
@@ -19,7 +20,7 @@
 
 	<div class="feed">
 		<div class="tweet">
-			<img src="download.jpg" class="img-circle" alt="User image">
+			<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
 			<h3>Abhijeet Gurle</h3>
 			<p>Vestibulum dignissim lectus eu turpis egestas, elementum semper purus rhoncus. Praesent convallis tellus et enim commodo, vel luctus ante ultrices. Aliquam at elit id dolor condimentum tristique. In consequat quis justo et aliquet. In suscipit ex quis dolor pharetra hendrerit. Maecenas ultrices dui justo, at vulputate lacus posuere eu.</p>
 		</div>
