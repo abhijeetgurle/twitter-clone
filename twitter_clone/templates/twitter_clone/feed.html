@@ -16,6 +16,11 @@
 	      		<li><a href="#">Followers</a></li>
 	      		<li><a href="#">HashTags</a></li>
     		</ul>
+
+    		<ul class="nav navbar-nav navbar-right">
+      			<li><a href="{%url 'feed' %}"><span class="glyphicon glyphicon-user"></span> Logged in as, {{ user.get_username }}</a></li>
+      			<li><a href="{%url 'logout_user' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    		</ul>
   		</div>
 	</nav>
 

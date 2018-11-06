@@ -1,6 +1,7 @@
 from django.http import *
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from .forms import SignUpForm
 
 # Create your views here.
 def login_user(request):
@@ -16,7 +17,11 @@ def login_user(request):
 
 	return render(request, 'twitter_clone/login.html', {})
 
-from .forms import SignUpForm
+
+def logout_user(request):
+	logout(request)
+	return HttpResponseRedirect('/')
+	
 
 def signup(request):
     if request.method == 'POST':
@@ -31,6 +36,7 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'twitter_clone/signup.html', {'form': form})	
+
 
 def feed(request):
 	return render(request, 'twitter_clone/feed.html', {})	
