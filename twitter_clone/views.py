@@ -2,6 +2,9 @@ from django.http import *
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm
+from .models import Tweet
+from .models import Follow
+from django.contrib.auth.models import User
 
 # Create your views here.
 def login_user(request):
@@ -39,4 +42,9 @@ def signup(request):
 
 
 def feed(request):
-	return render(request, 'twitter_clone/feed.html', {})	
+    me= request.user
+    tweets=[]
+    f=list(Follow.objects.filter(follower=me))
+    for i in range(f.__len__()):
+        tweets.append(Tweet.objects.filter(author=f[i].following))
+    return render(request, 'twitter_clone/feed.html', {'tweets':tweets})

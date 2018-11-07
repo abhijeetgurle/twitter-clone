@@ -25,31 +25,25 @@
 	</nav>
 
 	<div class="feed">
+		{% for tweet in tweets%}
+		{% for i in tweet%}
+		<div class="tweet">
+			<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
+			<h3>{{i.author}}</h3>
+			<p>{{i.text}}</p>
+			<button type="button" class="btn btn-default btn-sm">
+          		<span class="glyphicon glyphicon-thumbs-up"></span> Like
+        	</button>{{i.likes}}
+        	<a href="#">
+          		<span class="glyphicon glyphicon-comment"></span>
+        	</a>
+        	<hr>
 
-		<div class="tweet">
-			<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
-			<h3>Abhijeet Gurle</h3>
-			<p>Vestibulum dignissim lectus eu turpis egestas, elementum semper purus rhoncus. Praesent convallis tellus et enim commodo, vel luctus ante ultrices. Aliquam at elit id dolor condimentum tristique. In consequat quis justo et aliquet. In suscipit ex quis dolor pharetra hendrerit. Maecenas ultrices dui justo, at vulputate lacus posuere eu.</p>
-			<button type="button" class="btn btn-default btn-sm">
-          		<span class="glyphicon glyphicon-thumbs-up"></span> Like
-        	</button>
-        	<a href="#">
-          		<span class="glyphicon glyphicon-comment"></span>
-        	</a>
-        	<hr>
 		</div>
-		<div class="tweet">
-			<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
-			<h3>Shubham Bhavsar</h3>
-			<p>Vestibulum dignissim lectus eu turpis egestas, elementum semper purus rhoncus. Praesent convallis tellus et enim commodo, vel luctus ante ultrices. Aliquam at elit id dolor condimentum tristique. In consequat quis justo et aliquet. In suscipit ex quis dolor pharetra hendrerit. Maecenas ultrices dui justo, at vulputate lacus posuere eu.</p>
-			<button type="button" class="btn btn-default btn-sm">
-          		<span class="glyphicon glyphicon-thumbs-up"></span> Like
-        	</button>
-        	<a href="#">
-          		<span class="glyphicon glyphicon-comment"></span>
-        	</a>
-        	<hr>
-		</div>
+		{% endfor %}
+		{% endfor %}
+
+
 
 	</div>
 </body>
