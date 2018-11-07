@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'twitter_clone',
+    'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
