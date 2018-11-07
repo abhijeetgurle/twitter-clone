@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm
 from .models import Tweet
 from .models import Follow
+import django.shortcuts
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -35,7 +36,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return HttpResponseRedirect('/')
     else:
         form = SignUpForm()
     return render(request, 'twitter_clone/signup.html', {'form': form})	
