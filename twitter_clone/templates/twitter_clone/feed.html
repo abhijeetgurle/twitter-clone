@@ -25,6 +25,20 @@
 	</nav>
 
 	<div class="feed">
+{% load widget_tweaks %}
+    <form method="post" id="tweet">{% csrf_token %}
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+
+<div class="well clearfix">
+    {{form|add_class:"form-control"}}
+ <textarea class="form-control" id="tweettext" name={{form.text.name}}></textarea><br/>
+  <button class="btn btn-primary pull-right">Tweet</button>
+</div>
+
+    </form>
 		{% for tweet in tweets%}
 		{% for i in tweet%}
 		<div class="tweet">

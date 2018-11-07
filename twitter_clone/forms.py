@@ -3,7 +3,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from .models import Tweet
 
 
 class SignUpForm(UserCreationForm):
@@ -22,3 +22,9 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 
+
+class twitter(forms.ModelForm):
+
+    class Meta:
+        model=Tweet
+        fields=('text',)

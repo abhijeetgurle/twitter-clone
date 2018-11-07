@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm
 from .models import Tweet
 from .models import Follow
+from django.utils import timezone
+from .forms import twitter
+
 import django.shortcuts
 from django.contrib.auth.models import User
 
@@ -49,3 +52,18 @@ def feed(request):
     for i in range(f.__len__()):
         tweets.append(Tweet.objects.filter(author=f[i].following))
     return render(request, 'twitter_clone/feed.html', {'tweets':tweets})
+
+def tweet(request):
+
+
+    if request.method=='POST' :
+        form = twitter(request.POST)
+        if form.is_valid():
+            #Tweet.text=request.POST['tweettext']
+            Tweet.author=request.user
+            Tweet.published_date=timezone.now()
+            Tweet.save()
+            return HttpResponseRedirect('/feed')
+    else:
+        form=twitter()
+    return render(request,'/feed',{form:'form'})
