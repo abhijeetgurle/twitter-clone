@@ -5,7 +5,7 @@ from .forms import SignUpForm
 from .models import Tweet
 from .models import Follow
 from django.utils import timezone
-from .forms import twitter
+
 from .forms import UserFollower
 from django.db.models import Q
 
@@ -48,6 +48,13 @@ def signup(request):
 
 
 def feed(request):
+    if request.method=='POST' :
+
+        #Tweet.text=request.POST['tweettext']
+        #Tweet.author=request.user
+        #Tweet.published_date=timezone.now()
+        Tweet.objects.create(text=request.POST.get('tweettext'),author=request.user,likes=0)
+        #Tweet.save()
     me= request.user
     tweets=[]
     f=list(Follow.objects.filter(follower=me))
@@ -89,17 +96,3 @@ def following(request):
 	return render(request, 'twitter_clone/following.html', {'followed_user_objects':followed_user_username, 'not_followed_user_objects' :not_followed_user})
 
 
-def tweet(request):
-
-
-    if request.method=='POST' :
-        form = twitter(request.POST)
-        if form.is_valid():
-            #Tweet.text=request.POST['tweettext']
-            Tweet.author=request.user
-            Tweet.published_date=timezone.now()
-            Tweet.save()
-            return HttpResponseRedirect('/feed')
-    else:
-        form=twitter()
-    return render(request,'/feed',{form:'form'})
