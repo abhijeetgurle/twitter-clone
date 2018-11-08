@@ -6,6 +6,8 @@ from .models import Tweet
 from .models import Follow
 from django.utils import timezone
 from .forms import twitter
+from .forms import UserFollower
+from django.db.models import Q
 
 import django.shortcuts
 from django.contrib.auth.models import User
@@ -55,6 +57,20 @@ def feed(request):
 
 
 def following(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		method = request.POST.get('method')
+		user = User.objects.get(username=username)
+
+		if(method=='unfollow'):
+			Follow.objects.filter(Q(follower=request.user) & Q(following=user)).delete()
+			return HttpResponseRedirect('/following')
+
+		else:
+			Follow.objects.create(follower=request.user, following=user)
+			print("entry added successfully")
+			return HttpResponseRedirect('/following')			
+
 	logged_in_user = request.user
 	followed_user_object = Follow.objects.filter(follower=logged_in_user)
 
@@ -69,8 +85,6 @@ def following(request):
 	
 	all_users = list(User.objects.all())
 	not_followed_user = [x for x in all_users if x not in users_excluded]
-	print(followed_user_username)
-	print(not_followed_user)
 
 	return render(request, 'twitter_clone/following.html', {'followed_user_objects':followed_user_username, 'not_followed_user_objects' :not_followed_user})
 

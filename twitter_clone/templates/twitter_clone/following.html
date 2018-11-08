@@ -31,7 +31,11 @@
 			<div class="user_profile">
 				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
 				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
-				<button type="button" class="btn btn-success followed_status"><span>Followed</span></button>
+				<form class="inline_form" method="POST">{% csrf_token %}
+					<input type='hidden' name='username' value='{{ user.username }}' />
+					<input type='hidden' name='method' value='unfollow' />
+					<button type="submit" class="btn btn-success followed_status inline_button"><span>Followed</span></button>
+				</form>
 				<hr>
 			</div>
 		{% endfor %}	
@@ -41,7 +45,11 @@
 			<div class="user_profile">
 				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
 				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
-				<button type="button" class="btn btn-primary"><span>Follow</span></button>
+				<form class="inline_form" method="POST" >{% csrf_token %}
+					<input type='hidden' name='username' value='{{ user.username }}' />
+					<input type='hidden' name='method' value='follow' />
+					<button type="submit" class="btn btn-primary inline_button"><span>Follow</span></button>
+				</form>
 				<hr>
 			</div>
 		{% endfor %}

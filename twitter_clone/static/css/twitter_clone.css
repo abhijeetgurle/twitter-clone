@@ -77,14 +77,24 @@
 
 .user_profile h3 {
 
+  display: inline-block;
+  width: 500px;
+  margin-top: 10px;
+}
+
+.inline_form {
 
   display: inline-block;
 }
 
-.user_profile button {
+.inline_form input {
+
+  display: inline-block;
+}
+
+.inline_button {
 
   float: right;
   width: 100px;
   height: 40px;
-  margin-top: 15px;
 }

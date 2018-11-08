@@ -22,9 +22,13 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 
-
 class twitter(forms.ModelForm):
 
     class Meta:
         model=Tweet
         fields=('text',)
+
+
+class UserFollower(forms.Form):
+    username = forms.CharField(max_length=30)
+    method = forms.CharField(max_length=30)
