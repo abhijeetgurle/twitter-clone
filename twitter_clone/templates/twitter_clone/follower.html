@@ -9,7 +9,7 @@
     		<div class="navbar-header">
       			<a class="navbar-brand" href="#">TwitterClone</a>
     		</div>
-    		
+
     		<ul class="nav navbar-nav">
       			<li><a href="{%url 'feed' %}">Home</a></li>
 	      		<li class="active"><a href="{%url 'following' %}">Following</a></li>
@@ -26,36 +26,20 @@
 
 	<div class="feed">
 
-		{% for user in followed_user_objects %}
+		{% for user in query %}
 
 			<div class="user_profile">
 				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
 				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
-				<!--<h5><a href="#" > @{{user.username}} </a></h5>-->
-				<form class="inline_form" method="POST">{% csrf_token %}
-					<input type='hidden' name='username' value='{{ user.username }}' />
-					<input type='hidden' name='method' value='unfollow' />
-					<button type="submit" class="btn btn-success followed_status inline_button"><span>Followed</span></button>
-				</form>
-				<hr>
-			</div>
-		{% endfor %}	
 
-		{% for user in not_followed_user_objects %}
+              <h5><a href="#" > @{{user.username}} </a></h5>
 
-			<div class="user_profile">
-				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
-				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
-				<!--<h5><a href="#" > @{{user.username}} </a></h5>-->
-				<form class="inline_form" method="POST" >{% csrf_token %}
-					<input type='hidden' name='username' value='{{ user.username }}' />
-					<input type='hidden' name='method' value='follow' />
-					<button type="submit" class="btn btn-primary inline_button"><span>Follow</span></button>
-				</form>
 				<hr>
 			</div>
 		{% endfor %}
-			
+
+
+
 	</div>
 
-{% endblock %}	
+{% endblock %}

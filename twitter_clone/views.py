@@ -96,3 +96,10 @@ def following(request):
 	return render(request, 'twitter_clone/following.html', {'followed_user_objects':followed_user_username, 'not_followed_user_objects' :not_followed_user})
 
 
+def follower(request):
+    logged_in_user = request.user
+    following_user_object = Follow.objects.filter(following=logged_in_user)
+    following_user_username = []
+    for i in range(following_user_object.__len__()):
+        following_user_username.append(User.objects.get(username=(following_user_object[i].follower).username))
+    return render(request,'twitter_clone/follower.html',{'query':following_user_username})
