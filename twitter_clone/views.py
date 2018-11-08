@@ -53,6 +53,11 @@ def feed(request):
         tweets.append(Tweet.objects.filter(author=f[i].following))
     return render(request, 'twitter_clone/feed.html', {'tweets':tweets})
 
+
+def following(request):
+	return render(request, 'twitter_clone/following.html', {})
+
+
 def tweet(request):
 
 
