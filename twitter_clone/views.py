@@ -55,7 +55,24 @@ def feed(request):
 
 
 def following(request):
-	return render(request, 'twitter_clone/following.html', {})
+	logged_in_user = request.user
+	followed_user_object = Follow.objects.filter(follower=logged_in_user)
+
+	followed_user_username = []
+	for i in range(followed_user_object.__len__()):
+		followed_user_username.append(User.objects.get(username = (followed_user_object[i].following).username))	
+			
+	users_excluded = []
+	for i in range(followed_user_username.__len__()):		
+		users_excluded.append(followed_user_username[i]) 
+	users_excluded.append(User.objects.get(username = logged_in_user))
+	
+	all_users = list(User.objects.all())
+	not_followed_user = [x for x in all_users if x not in users_excluded]
+	print(followed_user_username)
+	print(not_followed_user)
+
+	return render(request, 'twitter_clone/following.html', {'followed_user_objects':followed_user_username, 'not_followed_user_objects' :not_followed_user})
 
 
 def tweet(request):

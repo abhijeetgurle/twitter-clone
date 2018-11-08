@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 
-
 <body>
 
 	<nav class="navbar navbar-default">
@@ -12,8 +11,8 @@
     		</div>
     		
     		<ul class="nav navbar-nav">
-      			<li><a href="#">Home</a></li>
-	      		<li class="active"><a href="#">Following</a></li>
+      			<li><a href="{%url 'feed' %}">Home</a></li>
+	      		<li class="active"><a href="{%url 'following' %}">Following</a></li>
 	      		<li><a href="#">Followers</a></li>
 	      		<li><a href="#">HashTags</a></li>
     		</ul>
@@ -26,19 +25,27 @@
 	</nav>
 
 	<div class="feed">
-		<div class="user_profile">
-			<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
-			<h3>Shubham Bhavsar</h3>
-			<button type="button" id="followed_status" class="btn btn-success"><span>Followed</span></button>
-			<hr>
-		</div>
 
-		<div class="user_profile">
-			<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
-			<h3>Abhijeet Gurle</h3>
-			<button type="button" class="btn btn-primary"><span>Follow</span></button>
-			<hr>
-		</div>
+		{% for user in followed_user_objects %}
+
+			<div class="user_profile">
+				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
+				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
+				<button type="button" class="btn btn-success followed_status"><span>Followed</span></button>
+				<hr>
+			</div>
+		{% endfor %}	
+
+		{% for user in not_followed_user_objects %}
+
+			<div class="user_profile">
+				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
+				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
+				<button type="button" class="btn btn-primary"><span>Follow</span></button>
+				<hr>
+			</div>
+		{% endfor %}
+			
 	</div>
 
 {% endblock %}	
