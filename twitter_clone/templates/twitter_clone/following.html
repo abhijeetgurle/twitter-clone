@@ -4,26 +4,6 @@
 
 <body>
 
-	<nav class="navbar navbar-default">
-  		<div class="container-fluid">
-    		<div class="navbar-header">
-      			<a class="navbar-brand" href="#">TwitterClone</a>
-    		</div>
-    		
-    		<ul class="nav navbar-nav">
-      			<li><a href="{%url 'feed' %}">Home</a></li>
-	      		<li class="active"><a href="{%url 'following' %}">Following</a></li>
-	      		<li><a href="{%url 'follower' %}">Followers</a></li>
-	      		<li><a href="#">HashTags</a></li>
-    		</ul>
-
-    		<ul class="nav navbar-nav navbar-right">
-      			<li><a href="{%url 'feed' %}"><span class="glyphicon glyphicon-user"></span> Logged in as, {{ user.get_username }}</a></li>
-      			<li><a href="{%url 'logout_user' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    		</ul>
-  		</div>
-	</nav>
-
 	<div class="feed">
 
 		{% for user in followed_user_objects %}
@@ -31,6 +11,7 @@
 			<div class="user_profile">
 				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
 				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
+				<!--<h5><a href="#" > @{{user.username}} </a></h5>-->
 				<form class="inline_form" method="POST">{% csrf_token %}
 					<input type='hidden' name='username' value='{{ user.username }}' />
 					<input type='hidden' name='method' value='unfollow' />
@@ -45,6 +26,7 @@
 			<div class="user_profile">
 				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
 				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
+				<!--<h5><a href="#" > @{{user.username}} </a></h5>-->
 				<form class="inline_form" method="POST" >{% csrf_token %}
 					<input type='hidden' name='username' value='{{ user.username }}' />
 					<input type='hidden' name='method' value='follow' />

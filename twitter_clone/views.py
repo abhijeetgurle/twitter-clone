@@ -5,7 +5,7 @@ from .forms import SignUpForm
 from .models import Tweet
 from .models import Follow
 from django.utils import timezone
-from .forms import twitter
+
 from .forms import UserFollower
 from django.db.models import Q
 
@@ -48,6 +48,13 @@ def signup(request):
 
 
 def feed(request):
+    if request.method=='POST' :
+
+        #Tweet.text=request.POST['tweettext']
+        #Tweet.author=request.user
+        #Tweet.published_date=timezone.now()
+        Tweet.objects.create(text=request.POST.get('tweettext'),author=request.user,likes=0)
+        #Tweet.save()
     me= request.user
     tweets=[]
     f=list(Follow.objects.filter(follower=me))
@@ -91,25 +98,8 @@ def following(request):
 
 def follower(request):
 	logged_in_user = request.user
-	follower_users_object = Follow.objects.filter(following=logged_in_user)
-
-	follower_users = []
-	for i in range(follower_users_object.__len__()):
-		follower_users.append(User.objects.get(username = (follower_users_object[i].follower).username))
-	return render(request, 'twitter_clone/follower.html', {'follower_users' :follower_users})
-
-
-def tweet(request):
-
-
-    if request.method=='POST' :
-        form = twitter(request.POST)
-        if form.is_valid():
-            #Tweet.text=request.POST['tweettext']
-            Tweet.author=request.user
-            Tweet.published_date=timezone.now()
-            Tweet.save()
-            return HttpResponseRedirect('/feed')
-    else:
-        form=twitter()
-    return render(request,'/feed',{form:'form'})
+    following_user_object = Follow.objects.filter(following=logged_in_user)
+    following_user_username = []
+    for i in range(following_user_object.__len__()):
+        following_user_username.append(User.objects.get(username=(following_user_object[i].follower).username))
+    return render(request,'twitter_clone/follower.html',{'query':following_user_username})
