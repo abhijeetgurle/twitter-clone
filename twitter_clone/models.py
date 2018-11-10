@@ -8,6 +8,7 @@ class Tweet(models.Model):
 	published_date = models.DateTimeField(blank=True, null=True,auto_now_add=True)
 	likes = models.IntegerField(null=True)
 	author = models.ForeignKey('auth.user', on_delete=models.CASCADE)
+	#dp= models.ImageField(upload_to='documents/%Y/%m/%d',)
 	def __str__(self):
 		return (str(self.id) +" "+self.text)
 

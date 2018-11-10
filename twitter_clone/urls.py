@@ -9,4 +9,5 @@ urlpatterns = [
     path('following', views.following, name='following'),
     path('follower',views.follower,name='follower'),
     path('my_activities',views.my_activities, name='my_activities'),
+    path('profile',views.profile,name='profile')
 ]

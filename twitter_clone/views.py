@@ -107,3 +107,23 @@ def my_activities(request):
 	logged_in_user = request.user
 	my_tweets = Tweet.objects.filter(author=logged_in_user)
 	return render(request,'twitter_clone/my_activities.html',{'my_tweets' :my_tweets})
+
+def profile(request):
+    logged_in_user = request.user
+    tweet_cnt=Tweet.objects.filter(author=logged_in_user).count
+    likes=0
+    tweet=Tweet.objects.filter(author=logged_in_user)
+    for t in tweet:
+        likes +=t.likes
+    follower=Follow.objects.filter(follower=logged_in_user).count()
+    following=Follow.objects.filter(following=logged_in_user).count()
+    user1=list(User.objects.filter(username=logged_in_user))
+
+    context={
+        'tweet_cnt':tweet_cnt,
+        'follower':follower,
+        'following':following,
+        'user1':user1[0],
+        'likes':likes
+    }
+    return render(request,'twitter_clone/profile.html',context)
