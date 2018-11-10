@@ -101,3 +101,9 @@ def follower(request):
 	for i in range(following_user_object.__len__()):
 		following_user_username.append(User.objects.get(username=(following_user_object[i].follower).username))
 	return render(request,'twitter_clone/follower.html',{'query':following_user_username})
+
+
+def my_activities(request):
+	logged_in_user = request.user
+	my_tweets = Tweet.objects.filter(author=logged_in_user)
+	return render(request,'twitter_clone/my_activities.html',{'my_tweets' :my_tweets})

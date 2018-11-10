@@ -8,4 +8,5 @@ urlpatterns = [
     path('feed', views.feed, name='feed'),
     path('following', views.following, name='following'),
     path('follower',views.follower,name='follower'),
+    path('my_activities',views.my_activities, name='my_activities'),
 ]
