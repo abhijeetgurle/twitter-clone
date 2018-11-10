@@ -117,7 +117,17 @@ def profile(request):
         likes +=t.likes
     follower=Follow.objects.filter(follower=logged_in_user).count()
     following=Follow.objects.filter(following=logged_in_user).count()
-    user1=list(User.objects.filter(username=logged_in_user))
+    user1=User.objects.filter(username=logged_in_user)
+
+    if request.method=='POST':
+        User.objects.filter(username=logged_in_user).update(first_name=request.POST.get('first_name'),
+                                                            last_name=request.POST.get('last_name'),
+                                                            username=request.POST.get('username'),
+                                                            email=request.POST.get('email'),
+                                                           )
+        u=user1[0]
+        u.set_password(request.POST.get('password'))
+        u.save()
 
     context={
         'tweet_cnt':tweet_cnt,
