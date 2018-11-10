@@ -5,8 +5,6 @@ from .forms import SignUpForm
 from .models import Tweet
 from .models import Follow
 from django.utils import timezone
-
-from .forms import UserFollower
 from django.db.models import Q
 
 import django.shortcuts

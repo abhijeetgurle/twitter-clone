@@ -11,9 +11,8 @@
 			<div class="user_profile">
 				<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
 				<h3>{{ user.first_name }}  {{ user.last_name }}</h3>
-
-              <h5><a href="#" > @{{user.username}} </a></h5>
-
+				<h5 id="user_link"><a href="#" > @{{user.username}} </a></h5>
+				<button class="btn btn-success inline_button"><span>Following</span></button>
 				<hr>
 			</div>
 		{% endfor %}
