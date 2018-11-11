@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm
 from .models import Tweet
 from .models import Follow
+from .models import HashTag
 from django.utils import timezone
 from django.db.models import Q
 
@@ -137,3 +138,8 @@ def profile(request):
         'likes':likes
     }
     return render(request,'twitter_clone/profile.html',context)
+
+
+def hashtags(request):
+    hashtag_list = HashTag.objects.all()
+    return render(request,'twitter_clone/hashtags.html',{'hashtag_list' :hashtag_list})    

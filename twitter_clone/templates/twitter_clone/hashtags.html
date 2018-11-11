@@ -1,0 +1,17 @@
+{% extends 'twitter_clone/base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+	
+	<div class="feed">
+		{% for hashtag in hashtag_list %}
+		<div class="tweet">
+				<a href=""><h3>#{{ hashtag.name }}</h3></a>
+        		<hr>
+        </div>
+        {% endfor %}
+	</div>
+</body>
+
+{% endblock %}
