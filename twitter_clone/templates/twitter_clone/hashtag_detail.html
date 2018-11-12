@@ -1,0 +1,26 @@
+{% extends 'twitter_clone/base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+	
+	<div class="feed">
+		{% for tweet in tweets %}
+			<div class="tweet">
+					<img src="{% static 'images/download.jpeg' %}" class="img-circle" alt="User image">
+					<h3>{{tweet.author}}</h3>
+					<p>{{tweet.text}}</p>
+					<button type="button" class="btn btn-default btn-sm">
+		          		<span class="glyphicon glyphicon-thumbs-up"></span> Like
+		        	</button>{{tweet.likes}}
+		        	<a href="#">
+		          		<span class="glyphicon glyphicon-comment"></span>
+		        	</a>
+		        	<hr>
+
+				</div>
+		{% endfor %}
+	</div>
+</body>
+
+{% endblock %}

@@ -7,7 +7,7 @@
 	<div class="feed">
 		{% for hashtag in hashtag_list %}
 		<div class="tweet">
-				<a href=""><h3>#{{ hashtag.name }}</h3></a>
+				<a href="{% url 'hashtag_detail' name=hashtag.name %}"><h3>#{{ hashtag.name }}</h3></a>
         		<hr>
         </div>
         {% endfor %}

@@ -11,4 +11,5 @@ urlpatterns = [
     path('my_activities',views.my_activities, name='my_activities'),
     path('profile',views.profile,name='profile'),
     path('hashtags',views.hashtags,name='hashtags'),
+    path('hashtags/<str:name>',views.hashtag_detail,name='hashtag_detail'),
 ]

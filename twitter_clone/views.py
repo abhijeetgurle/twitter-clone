@@ -1,5 +1,5 @@
 from django.http import *
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm
 from .models import Tweet
@@ -141,5 +141,14 @@ def profile(request):
 
 
 def hashtags(request):
-    hashtag_list = HashTag.objects.all()
-    return render(request,'twitter_clone/hashtags.html',{'hashtag_list' :hashtag_list})    
+    hashtag_list = HashTag.objects.order_by('name').values('name').distinct()
+    return render(request,'twitter_clone/hashtags.html',{'hashtag_list' :hashtag_list})
+
+
+def hashtag_detail(request, name):
+    hashtag_objects = HashTag.objects.filter(name=name)
+    tweets = []
+    for hashtag_object in hashtag_objects:
+        print(hashtag_object.tweet)
+        tweets.append(Tweet.objects.get(pk=hashtag_object.tweet.pk))
+    return render(request, 'twitter_clone/hashtag_detail.html', {'tweets' :tweets})
