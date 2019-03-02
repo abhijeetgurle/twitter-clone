@@ -25,7 +25,7 @@ SECRET_KEY = '=(2%-p6w2v_(9a^53cyg(c@99#y7)r#s$q322^we5bpwfob=(@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [shrouded-atoll-39051.herokuapp.com]
 
 
 # Application definition
